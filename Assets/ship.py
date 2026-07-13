@@ -1,17 +1,20 @@
 import pygame
 
-from settings import Settings
-from alien_invasion import AlienInvasion
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from alien_invasion import AlienInvasion
+
 
 class Ship:
 
-    def __init__(self, game: AlienInvasion) -> None:
+    def __init__(self, game: 'AlienInvasion') -> None:
         self.game = game
+
         self.settings = game.settings
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
 
-        
         self.image = pygame.image.load(self.settings.ship_file)
         self.image = pygame.transform.scale(
             self.image,
@@ -20,6 +23,12 @@ class Ship:
 
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
+
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self) -> None:
+        pass
 
     def draw(self) -> None:
         self.screen.blit(self.image, self.rect)

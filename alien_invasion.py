@@ -17,7 +17,6 @@ class AlienInvasion:
         )
         pygame.display.set_caption(self.settings.name)
 
-        
         self.bg = pygame.image.load(self.settings.bg_file)
         self.bg = pygame.transform.scale(
             self.bg,
@@ -32,15 +31,13 @@ class AlienInvasion:
         """Main game loop."""
         while self.running:
             self._check_events()
-
-           
+            self. ship.update()
             self._update_screen()
 
             pygame.display.flip()
             self.clock.tick(self.settings.FPS)
 
     def _update_screen(self):
-        self.screen.blit(self.bg, (0, 0))
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
 
@@ -50,6 +47,20 @@ class AlienInvasion:
                 self.running = False
                 pygame.quit()
                 sys.exit()
+
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
+
+    def _check_keydown_events(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+
+    def _check_keyup_events(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
 
 
 if __name__ == "__main__":
