@@ -1,3 +1,9 @@
+"""
+Program: Alien Invasion
+Author: Komalpreet Kaur
+Purpose: Defines laser projectile behavior 
+Date: July 24, 2026
+"""
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING

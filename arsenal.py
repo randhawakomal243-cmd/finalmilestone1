@@ -1,3 +1,9 @@
+"""
+Program: Alien Invasion
+Author: Komalpreet Kaur
+Purpose: Implements horizontal laser movement.
+Date: July 24, 2026
+"""
 import pygame
 from bullet import Bullet
 from typing import TYPE_CHECKING

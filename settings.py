@@ -1,3 +1,9 @@
+"""
+Program: Alien Invasion
+Author: Komalpreet Kaur
+Purpose: Stores all game configuration settings 
+Date: July 24, 2026
+"""
 from pathlib import Path
 
 

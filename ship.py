@@ -1,3 +1,9 @@
+"""
+Program: Alien Invasion
+Author: Komalpreet Kaur
+Purpose: Implements side-scrolling ship mechanics.
+Date: July 24, 2026
+"""
 import pygame
 from typing import TYPE_CHECKING
 
