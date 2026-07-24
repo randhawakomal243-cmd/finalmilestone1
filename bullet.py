@@ -2,6 +2,8 @@
 Program: Alien Invasion
 Author: Komalpreet Kaur
 Purpose: Defines laser projectile behavior 
+Starter Code:
+https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
 """
 import pygame

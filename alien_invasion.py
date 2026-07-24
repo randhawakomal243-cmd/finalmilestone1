@@ -2,7 +2,8 @@
 Program: Alien Invasion
 Author: Komalpreet Kaur
 Purpose: A modified Alien Invasion game with side-scrolling ship mechanics.
-
+Starter Code:
+https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
 """
 

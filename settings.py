@@ -2,6 +2,8 @@
 Program: Alien Invasion
 Author: Komalpreet Kaur
 Purpose: Stores all game configuration settings 
+Starter Code:
+https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
 """
 from pathlib import Path
