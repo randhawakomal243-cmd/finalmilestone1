@@ -17,9 +17,17 @@ class Bullet(Sprite):
         self.settings = game.settings
 
         self.image = pygame.image.load(self.settings.bullet_file)
+
+        # Rotate laser to horizontal direction
+        self.image = pygame.transform.rotate(
+            self.image,
+            -90
+        )
+
+        # Swap width and height after rotation
         self.image = pygame.transform.scale(
             self.image,
-            (self.settings.bullet_w, self.settings.bullet_h)
+            (self.settings.bullet_h, self.settings.bullet_w)
         )
 
         self.rect = self.image.get_rect()
