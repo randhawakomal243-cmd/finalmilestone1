@@ -1,13 +1,15 @@
 """
 Program: Alien Invasion
 Author: Komalpreet Kaur
-Purpose: Defines laser projectile behavior 
+Purpose: Controls vertical laser projectile behavior.
 Starter Code:
 https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
 """
+
 import pygame
 from pygame.sprite import Sprite
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -15,41 +17,47 @@ if TYPE_CHECKING:
 
 
 class Bullet(Sprite):
-    """Create and control laser bullets fired by the ship."""
+    """Create and control laser bullets."""
 
     def __init__(self, game: 'AlienInvasion'):
-        """Initialize a bullet at the ship's current position."""
+        """Create a bullet at the ship location."""
+
         super().__init__()
 
         self.screen = game.screen
         self.settings = game.settings
 
-        self.image = pygame.image.load(self.settings.bullet_file)
+        self.image = pygame.image.load(
+            self.settings.bullet_file
+        ).convert_alpha()
 
-        # Rotate laser to horizontal direction
-        self.image = pygame.transform.rotate(
-            self.image,
-            -90
-        )
-
-        # Swap width and height after rotation
         self.image = pygame.transform.scale(
             self.image,
-            (self.settings.bullet_h, self.settings.bullet_w)
+            (
+                self.settings.bullet_w,
+                self.settings.bullet_h
+            )
         )
 
         self.rect = self.image.get_rect()
 
-        # Start bullet from the right side of the ship
-        self.rect.midleft = game.ship.rect.midright
+        self.rect.midtop = game.ship.rect.midtop
 
-        self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
+
 
     def update(self):
-        """Move the bullet horizontally across the screen."""
-        self.x += self.settings.bullet_speed
-        self.rect.x = int(self.x)
+        """Move bullet upward."""
+
+        self.y -= self.settings.bullet_speed
+
+        self.rect.y = int(self.y)
+
 
     def draw(self):
-        """Draw the bullet on the screen."""
-        self.screen.blit(self.image, self.rect)
+        """Draw the bullet."""
+
+        self.screen.blit(
+            self.image,
+            self.rect
+        )
