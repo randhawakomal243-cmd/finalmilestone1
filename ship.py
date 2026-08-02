@@ -1,11 +1,12 @@
 """
 Program: Alien Invasion
 Author: Komalpreet Kaur
-Purpose: Implements side-scrolling ship mechanics.
+Purpose: Controls the player's customized spaceship.
 Starter Code:
 https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
 """
+
 import pygame
 from typing import TYPE_CHECKING
 
@@ -18,65 +19,71 @@ class Ship(pygame.sprite.Sprite):
     """Create and control the player's spaceship."""
 
     def __init__(self, game: 'AlienInvasion', arsenal: 'Arsenal'):
-        """Initialize the player's ship and set its starting position."""
+        """Initialize ship settings and position."""
+
         super().__init__()
 
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
-        self.boundaries = self.screen.get_rect()
 
-        self.image = pygame.image.load(self.settings.ship_file)
+        self.image = pygame.image.load(
+            self.settings.ship_file
+        ).convert_alpha()
+
         self.image = pygame.transform.scale(
             self.image,
-            (self.settings.ship_w, self.settings.ship_h)
+            (
+                self.settings.ship_w,
+                self.settings.ship_h
+            )
         )
 
         self.rect = self.image.get_rect()
 
-        # Start ship on the left side
-        self._center_ship()
+        self.screen_rect = self.screen.get_rect()
 
-        # Track 1 movement controls
-        self.moving_up = False
-        self.moving_down = False
+        self.rect.midbottom = self.screen_rect.midbottom
+
+        self.x = float(self.rect.x)
+
+        self.moving_left = False
+        self.moving_right = False
 
         self.arsenal = arsenal
 
-    def _center_ship(self):
-        """Place the ship on the left side of the screen."""
-        self.rect.midleft = self.boundaries.midleft
-        self.rect.x = 20
-        self.y = float(self.rect.y)
 
     def update(self):
-        """Update ship position and arsenal."""
-        self._update_ship_movement()
+        """Update ship movement."""
 
-    def _update_ship_movement(self):
-        """Move the ship vertically based on player input."""
-        speed = self.settings.ship_speed
+        if self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
 
-        if self.moving_up and self.rect.top > self.boundaries.top:
-            self.y -= speed
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.x += self.settings.ship_speed
 
-        if self.moving_down and self.rect.bottom < self.boundaries.bottom:
-            self.y += speed
+        self.rect.x = int(self.x)
 
-        self.rect.y = int(self.y)
 
     def draw(self):
-        """Draw the ship on the screen."""
-        self.screen.blit(self.image, self.rect)
+        """Draw the ship."""
+
+        self.screen.blit(
+            self.image,
+            self.rect
+        )
+
 
     def fire(self):
-        """Fire a bullet from the ship."""
-        return self.arsenal.fire_bullet()
+        """Fire a laser."""
 
-    def check_collisions(self, other_group):
-        """Check for collisions with another sprite group."""
-        if pygame.sprite.spritecollideany(self, other_group):
-            self._center_ship()
-            return True
+        self.arsenal.fire_bullet()
 
-        return False
+
+    def check_collisions(self, alien_group):
+        """Check if an alien hits the ship."""
+
+        return pygame.sprite.spritecollideany(
+            self,
+            alien_group
+        )
