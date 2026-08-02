@@ -1,7 +1,7 @@
 """
 Program: Alien Invasion
 Author: Komalpreet Kaur
-Purpose: Creates and manages a custom non-grid alien fleet.
+Purpose: Creates and manages the alien fleet.
 Starter Code:
 https://github.com/RedBeard41/alien_Invasion_starter.git
 Date: July 24, 2026
